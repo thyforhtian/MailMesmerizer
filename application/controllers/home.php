@@ -39,9 +39,22 @@ class Home extends CI_Controller
         {
             $grupa['grupa'] = $q;
         }
+
         $this->load->view('header');
-        $this->load->view('get_groups_view',$grupa);
+        $this->load->view('get_groups_view', $grupa);
         $this->load->view('footer');
+    }
+
+    function getGroupClients()
+    {
+        
+        $group_id = $this->input->post('id');
+        $q = $this->mm_model->getGroupClients($group_id);
+        $data['data'] = $q;
+        foreach($data['data'] as $row)
+        {
+            echo $row->email.", ";
+        }
     }
 
     function addClient()
