@@ -8,22 +8,40 @@ class Home extends CI_Controller
 {
     function index()
     {
-        $this->load->view('home');
+        $this->load->view('header');
+        $this->load->view('index');
+        $this->load->view('footer');
     }
 
     function addClientView()
     {
-        $grupa['grupa'] = $this->mm_model->getGroup();
-        $this->load->view('add_client', $grupa);
+        $grupa['grupa'] = $this->mm_model->getGroups();
+        $this->load->view('header');
+        $this->load->view('add_client_view', $grupa);
+        $this->load->view('footer');
     }
 
     function getClients()
     {
-        if($q = $this->mm_model->getClients())
+        $data['clients'] = $this->mm_model->getClients();
+//        if($q = $this->mm_model->getClients())
+//        {
+//            $data['clients'] = $q;
+//        }
+        $this->load->view('header');
+        $this->load->view('get_clients',$data);
+        $this->load->view('footer');
+    }
+
+    function getGroups()
+    {
+        if($q = $this->mm_model->getGroups())
         {
-            $data['clients'] = $q;
+            $grupa['grupa'] = $q;
         }
-        $this->load->view('index',$data);
+        $this->load->view('header');
+        $this->load->view('get_groups_view',$grupa);
+        $this->load->view('footer');
     }
 
     function addClient()
@@ -31,7 +49,7 @@ class Home extends CI_Controller
         $data = array(
             'imie' => $this->input->post('imie'),
             'nazwisko' => $this->input->post('nazwisko'),
-            'adres' => $this->input->post('adres'),
+            'firma' => $this->input->post('firma'),
             'email' => $this->input->post('email'),
             'client_groups_id' => $this->input->post('grupa')
         );

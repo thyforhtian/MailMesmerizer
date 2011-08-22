@@ -21,10 +21,11 @@ class MM_model extends CI_Model
         return;
     }
 
-    function getGroup()
+    function getGroups()
     {
         $q = $this->db->get('client_groups');
         return $q->result();
+
     }
 }
 ?>

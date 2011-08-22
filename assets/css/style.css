@@ -1,0 +1,65 @@
+body {
+    background: url(../img/bg.png) repeat;
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+
+input {
+    width: 15em;
+}
+
+a {
+    color: #888;
+}
+
+header {
+    margin: 20px 0;
+}
+
+section#wrapper {
+    max-width: 960px;
+    margin:  0 auto;
+    background:  #fff;
+    -webkit-box-shadow: 0 0 100px #ddd inset, 0 0 15px #000;
+       -moz-box-shadow: 0 0 100px #ddd inset, 0 0 15px #000;
+            box-shadow: 0 0 100px #ddd inset, 0 0 15px #000;
+    padding:  20px;
+    border-radius: 10px;
+    border: 1px solid #999;
+}
+
+table.getClients {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+table.getClients tr {
+    width: 100%;
+    background: -moz-linear-gradient(center bottom , #ccc 0%, #eee 50%) repeat scroll 0 0 #F0F0F0;
+    box-shadow: 0 1px 2px #838383;
+}
+
+table.getClients tr:hover {
+    background: -moz-linear-gradient(center bottom , #9FB0C6 0%, #eee 50%) repeat scroll 0 0 #F0F0F0;
+}
+
+table.getClients tr td {
+    padding: 5px;
+}
+
+table.addClient {
+    width:90%;
+    margin:  0 auto;
+    text-align: center;
+    vertical-align: text-top;
+    border-collapse: separate;
+    border-spacing: 20px 0;
+}
+
+table.addClient td {
+    width: 50%;
+    background: -moz-linear-gradient(center bottom , #ccc 0%, #eee 50%) repeat scroll 0 0 #F0F0F0;
+    box-shadow: 0 1px 2px #838383;
+}
