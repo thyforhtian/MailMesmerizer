@@ -132,7 +132,7 @@ div.emails {
 }
 
 table#indexMenu {
-    width:75%;
+    width:85%;
     margin: 30px auto;
     text-align: center;
 }
@@ -140,3 +140,16 @@ table#indexMenu {
 div#pagination {
     text-align: center;
 }
+
+div.addEmail {
+    text-align: center;
+}
+
+div.addEmail textarea {
+    display: block;
+    width: 100%;
+    margin:  5px auto;
+    min-height: 500px
+}
+
+

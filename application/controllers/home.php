@@ -20,6 +20,16 @@ class Home extends CI_Controller
         $this->load->view('footer');
     }
 
+    function addClient()
+    {
+        $data = array(
+            'title' => $this->input->post('title'),
+            'content' => $this->input->post('mailBody'),
+        );
+        $this->mm_model->addEmail($data);
+        $this->getEmails();
+    }
+
     function getClients()
     {
         //Pagination
@@ -34,52 +44,46 @@ class Home extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['paglinks'] = $this->pagination->create_links();
-echo $config['total_rows'];
+        echo $config['total_rows'];
 
-        $data['clients'] = $this->mm_model->getClients($config['per_page'],$this->uri->segment(3));
-//        if($q = $this->mm_model->getClients())
-//        {
-//            $data['clients'] = $q;
-//        }
+        $data['clients'] = $this->mm_model->getClients($config['per_page'], $this->uri->segment(3));
+
         $this->load->view('header');
-        $this->load->view('get_clients',$data);
+        $this->load->view('get_clients', $data);
         $this->load->view('footer');
     }
 
-    function getGroups()
+    function getEmails()
     {
-        if($q = $this->mm_model->getGroups())
-        {
-            $grupa['grupa'] = $q;
-        }
+        //Pagination
+        $this->load->library('pagination');
+
+        $config['base_url'] = "http://localhost:81/MM/index.php/home/getEmails";
+        $config['total_rows'] = $this->db->count_all('emails');
+        $config['per_page'] = 10;
+        $config['full_tag_open'] = '<p>';
+        $config['full_tag_close'] = '</p>';
+
+        $this->pagination->initialize($config);
+
+        $data['paglinks'] = $this->pagination->create_links();
+        echo $config['total_rows'];
+
+        $data['clients'] = $this->mm_model->getEmails($config['per_page'], $this->uri->segment(3));
 
         $this->load->view('header');
-        $this->load->view('get_groups_view', $grupa);
+        $this->load->view('get_emails', $data);
         $this->load->view('footer');
     }
 
-    function addGroup()
+    function addEmailView()
     {
-       $data['name'] = $this->input->post('nazwagrupy');
-
-        $this->mm_model->addGroup($data);
-        @$this->getGroups($dodane);
+        $this->load->view('header');
+        $this->load->view('add_email_view');
+        $this->load->view('footer');
     }
 
-    function getGroupClients()
-    {
-        
-        $group_id = $this->input->post('id');
-        $q = $this->mm_model->getGroupClients($group_id);
-        $data['data'] = $q;
-
-        foreach($data['data'] as $row)
-        {
-            echo "<span id='".$row->id."'>".$row->email."</span>, ";
-        }
-    }
-
-    function addClient()
+    function addEmail()
     {
         $data = array(
             'imie' => $this->input->post('imie'),
@@ -92,21 +96,59 @@ echo $config['total_rows'];
         $this->index();
     }
 
+    function deleteEmail()
+    {
+        $data = array('id' => $this->input->post('id'));
+        $this->mm_model->deleteEmail($data);
+    }
+
+    function getGroups()
+    {
+        if ($q = $this->mm_model->getGroups()) {
+            $grupa['grupa'] = $q;
+        }
+
+        $this->load->view('header');
+        $this->load->view('get_groups_view', $grupa);
+        $this->load->view('footer');
+    }
+
+    function addGroup()
+    {
+        $data['name'] = $this->input->post('nazwagrupy');
+
+        $this->mm_model->addGroup($data);
+        @$this->getGroups($dodane);
+    }
+
+    function getGroupClients()
+    {
+
+        $group_id = $this->input->post('id');
+        $q = $this->mm_model->getGroupClients($group_id);
+        $data['data'] = $q;
+
+        foreach ($data['data'] as $row)
+        {
+            echo "<span id='" . $row->id . "'>" . $row->email . "</span>, ";
+        }
+    }
+
     function readFromFile()
     {
         $this->load->helper('file');
         $dupa = $_FILES['emailsFile']['tmp_name'];
         $read['plik'] = read_file($dupa);
         $justread = $read['plik'];
-        $rozbite = preg_split('/[;,\n\r]/',$justread);
+        $rozbite = preg_split('/[;,\n\r]/', $justread);
 
         $read['tablica'] = array_map('trim', $rozbite);
         $read['grupa'] = $this->input->post('grupa');
 
-        $this->mm_model->addEmails($read['tablica'],$read['grupa']);
+        $this->mm_model->addClientEmails($read['tablica'], $read['grupa']);
 
         $this->load->view('header');
-        $this->load->view('dodane_z_pliku',$read);
+        $this->load->view('dodane_z_pliku', $read);
         $this->load->view('footer');
     }
 }

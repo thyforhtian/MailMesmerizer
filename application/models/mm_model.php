@@ -27,6 +27,25 @@ class MM_model extends CI_Model
         return $q->result();
     }
 
+    function getEmails($num,$offset)
+    {
+        $q = $this->db->get('emails',$num,$offset);
+        return $q->result();
+    }
+
+    function addEmail($data)
+    {
+        $this->db->insert('emails',$data);
+        return;
+    }
+
+    function deleteEmail($data)
+    {
+        $this->db->delete('emails',$data);
+        return;
+    }
+
+
     function addGroup($data)
     {
         $this->db->insert('client_groups',$data);
@@ -43,7 +62,7 @@ class MM_model extends CI_Model
         return $q->result();
     }
 
-    function addEmails($tablica,$grupa)
+    function addClientEmails($tablica,$grupa)
     {
         $this->load->helper('email');
         foreach($tablica as $row)
