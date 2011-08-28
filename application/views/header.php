@@ -11,7 +11,7 @@
     <body>
     <section id="wrapper">
         <header>
-            <img src="<?php echo img('index.php/assets/img/mm_logo_small.png'); ?>" alt="">
+            <?php echo img('assets/img/mm_logo_small.png'); ?>
         <nav>
             <?php echo anchor(site_url(),'Start'); ?>
             <?php echo anchor('/home/getClients','Klienci'); ?>

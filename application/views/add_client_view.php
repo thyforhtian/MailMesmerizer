@@ -33,6 +33,18 @@
                     <?php echo form_close(); ?></td>
                 <td>
                     <h2>Dodaj z pliku</h2>
+                    <?php echo form_open_multipart('home/readFromFile',array('id' => 'wczytajPlik')); ?>
+                    <input type="file" name="emailsFile"><br>
+
+                    <select name="grupa" id="grupa">
+                        <?php foreach ($grupa as $row): ?>
+                        <option value="<?php echo (int)$row->id; ?>"><?php echo $row->name; ?></option>
+                        <?php endforeach;  ?>
+                    </select>
+
+                    <input type="submit" value="Wczytaj">
+
+                    <?php echo form_close(); ?>
                 </td>
             </tr>
         </table>
