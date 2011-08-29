@@ -23,11 +23,14 @@ class Home extends CI_Controller
     function addClient()
     {
         $data = array(
-            'title' => $this->input->post('title'),
-            'content' => $this->input->post('mailBody'),
+            'imie' => $this->input->post('imie'),
+            'nazwisko' => $this->input->post('nazwisko'),
+            'firma' => $this->input->post('firma'),
+            'email' => $this->input->post('email'),
+            'client_groups_id' => $this->input->post('grupa')
         );
-        $this->mm_model->addEmail($data);
-        $this->getEmails();
+        $this->mm_model->addClient($data);
+        $this->getClients();
     }
 
     function getClients()
@@ -53,6 +56,12 @@ class Home extends CI_Controller
         $this->load->view('footer');
     }
 
+    function deleteClient()
+    {
+        $data = array('id' => $this->input->post('id'));
+        $this->mm_model->deleteClient($data);
+    }
+
     function getEmails()
     {
         //Pagination
@@ -76,6 +85,27 @@ class Home extends CI_Controller
         $this->load->view('footer');
     }
 
+    function updateEmail()
+    {
+        $id = $this->uri->segment(3);
+
+        if ($this->input->post('submit')) {
+            $title = $this->input->xss_clean($this->input->post('title'));
+            $content = $this->input->xss_clean($this->input->post('content'));
+
+            $this->mm_model->updatePost($id, $title, $content);
+
+            $data['posts'] = $this->posts_model->getPosts();
+            $this->load->view('crud_view', $data);
+        } else {
+            $data = array('id' => $id);
+            $data['email'] = $this->mm_model->getSingleEmail($id);
+            $this->load->view('header');
+            $this->load->view('update_email_view', $data);
+            $this->load->view('footer');
+        }
+    }
+
     function addEmailView()
     {
         $this->load->view('header');
@@ -86,14 +116,11 @@ class Home extends CI_Controller
     function addEmail()
     {
         $data = array(
-            'imie' => $this->input->post('imie'),
-            'nazwisko' => $this->input->post('nazwisko'),
-            'firma' => $this->input->post('firma'),
-            'email' => $this->input->post('email'),
-            'client_groups_id' => $this->input->post('grupa')
+            'title' => $this->input->post('title'),
+            'content' => $this->input->post('mailBody'),
         );
-        $this->mm_model->addClient($data);
-        $this->index();
+        $this->mm_model->addEmail($data);
+        $this->getEmails();
     }
 
     function deleteEmail()

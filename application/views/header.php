@@ -8,6 +8,7 @@
         <?php echo link_tag('assets/css/basic.css'); ?>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.6.2.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jgrowl_minimized.js"></script>
+
     </head>
     <body>
     <section id="wrapper">

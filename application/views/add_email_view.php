@@ -1,6 +1,6 @@
 <div class='addEmail'>
     <h2>Dodaj Wiadomość</h2>
-    <?php echo form_open('home/addClient'); ?>
+    <?php echo form_open('home/addEmail'); ?>
     <p>
         <label for="title">Tytuł:</label><br>
         <input type="text" id="title" name="title"/>

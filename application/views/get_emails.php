@@ -3,10 +3,11 @@
 <table class="getClients">
     <?php foreach ($clients as $row): ?>
     <?php $id = $row->id; ?>
-    <tr>
+    <tr id="<?php echo $id ?>">
         <td><?php echo $row->id; ?></td>
-        <td><?php echo $row->title; ?></td>
-        <td width="50px"><?php echo img('assets/img/delete.png'); ?></td>
+        <td><a href="updateEmail/<?php echo $id ?>"><?php echo $row->title; ?></a></td>
+        <td width="50px"><img class="delete" id="<?php echo $row->id; ?>"
+                              src="<?php echo base_url() ?>assets/img/delete.png"></td>
         <td width="50px"><img class="preview" id="<?php echo $row->id; ?>"
                               src="<?php echo base_url() ?>assets/img/options.png"></td>
     </tr>
@@ -20,6 +21,26 @@
 
 </table>
 <div id="pagination"><?php echo $paglinks ?></div>
+<div>
+</div>
 </section>
 
+<script type="text/javascript">
 
+    $("img.delete").click(function() {
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:81/MM/index.php/home/deleteEmail",
+            data: "id=" + id,
+            success: function() {
+                $("tr[id='" + id + "']").css("color", "red").delay(1000).fadeOut();
+                $.jGrowl("Wiadomość została usunięta");
+            },
+            error: function() {
+                alert("wystapil bląd");
+            }
+        });
+        return false;
+    });
+</script>

@@ -152,4 +152,8 @@ div.addEmail textarea {
     min-height: 500px
 }
 
+img.preview, img.delete {
+    cursor: pointer;
+}
+
 
