@@ -10,10 +10,23 @@
         <label for="mailBody">Treść wiadomości:</label>
         <?php echo form_textarea('mailBody'); ?>
     </p>
-     <p>
-        <?php echo form_submit('','Zapisz'); ?>
+
+    <p>
+        <?php echo form_submit('', 'Zapisz'); ?>
     </p>
 
     <?php echo form_close(); ?></td>
 </div>
 </section>
+<script type="text/javascript" src="<?php echo base_url() ?>/assets/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>/assets/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("textarea.[name='mailBody']").ckeditor({
+            skin: 'office2003',
+            autoParagraph: false,
+            autoGrow_minHeight: 400
+        });
+    });
+</script>
+<?php  ?>

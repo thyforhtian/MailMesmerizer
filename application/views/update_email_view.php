@@ -30,7 +30,10 @@
     $(document).ready(function() {
         $("textarea.[name='mailBody']").ckeditor({
             skin: 'office2003',
-            autoParagraph: false
+            autoParagraph: false,
+            autoGrow_minHeight: 400
         });
     });
 </script>
+
+    

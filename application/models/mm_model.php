@@ -9,12 +9,21 @@ class MM_model extends CI_Model
         parent::__construct();
     }
 
+    /**
+     * @param int $num
+     * @param int $offset
+     * @return
+     */
     function getClients($num, $offset)
     {
         $q = $this->db->get('clients', $num, $offset);
         return $q->result();
     }
 
+    /**
+     * @param $data
+     * @return
+     */
     function addClient($data)
     {
         $this->db->insert('clients', $data);

@@ -62,6 +62,9 @@ class Home extends CI_Controller
         $this->mm_model->deleteClient($data);
     }
 
+    /**
+     * @return void
+     */
     function getEmails()
     {
         //Pagination
@@ -177,6 +180,21 @@ class Home extends CI_Controller
         $this->load->view('header');
         $this->load->view('dodane_z_pliku', $read);
         $this->load->view('footer');
+    }
+
+    function sendEmail()
+    {
+        if (!$this->input->post('submit'))
+        {
+            $id = $this->input->post('id');
+            $data['email'] = $this->mm_model->getSingleEmail($id);
+            $data['grupy'] = $this->mm_model->getGroups();
+            $this->load->view('header');
+            $this->load->view('send_email_view',$data);
+            $this->load->view('footer');
+        } else {
+
+        }
     }
 }
 

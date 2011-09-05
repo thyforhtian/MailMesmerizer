@@ -10,6 +10,8 @@
                               src="<?php echo base_url() ?>assets/img/delete.png"></td>
         <td width="50px"><img class="preview" id="<?php echo $row->id; ?>"
                               src="<?php echo base_url() ?>assets/img/options.png"></td>
+        <td width="50px"><a href="<?php echo site_url() ?>/home/sendEmail"><img class="send" id="<?php echo $row->id; ?>"
+                                  src="<?php echo base_url() ?>assets/img/mail_small.png"></a></td>
     </tr>
     <?php $content = str_replace(array("\n\r", "\n", "\r"), "", addslashes($row->content)); ?>
     <script type="text/javascript">
